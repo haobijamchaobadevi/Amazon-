@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amazon India Replica</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        :root {
+            --primary-color: #febd69;
+            --secondary-color: #f3a847;
+            --border-radius: 4px;
+        }
+
+        body {
+            background-color: #f0f2f5;
+            color: #0f1111;
+        }
+
+        .header-container {
+            background: linear-gradient(to bottom, #131921, #232f3e);
+            color: white;
+            padding: 10px 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1400px;
+            margin: 0 auto;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .header-item.logo img {
+            height: 40px;
+            transition: transform 0.3s;
+        }
+
+        .header-item.logo img:hover {
+            transform: scale(1.05);
+        }
+
+        .header-item.search-bar {
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            max-width: 600px;
+        }
+
+        .search-bar select {
+            padding: 12px;
+            border: none;
+            background: #e6e6e6;
+            border-radius: var(--border-radius) 0 0 var(--border-radius);
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            font-size: 16px;
+            border-radius: 0;
+        }
+
+        .search-bar button {
+            padding: 12px 20px;
+            background: var(--primary-color);
+            border: none;
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background 0.3s;
+        }
+
+        .search-bar button:hover {
+            background: var(--secondary-color);
+        }
+
+        .header-item.account,
+        .header-item.cart {
+            padding: 10px;
+            cursor: pointer;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .header-item.account:hover,
+        .header-item.cart:hover {
+            background: #3a4553;
+            border-radius: var(--border-radius);
+        }
+
+        .nav-container {
+            background: #232f3e;
+            padding: 10px 20px;
+            border-bottom: 1px solid #3a4553;
+        }
+
+        .nav-items {
+            display: flex;
+            list-style: none;
+            color: white;
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .nav-item {
+            font-size: 14px;
+            cursor: pointer;
+            padding: 8px 15px;
+            transition: background 0.3s;
+        }
+
+        .nav-item:hover {
+            background: #3a4553;
+            border-radius: var(--border-radius);
+        }
+
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-toggle {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: #232f3e;
+            list-style: none;
+            flex-direction: column;
+            min-width: 200px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            border-radius: var(--border-radius);
+            z-index: 1001;
+        }
+
+        .dropdown.active .dropdown-menu {
+            display: flex;
+        }
+
+        @media (hover: hover) {
+            .dropdown:hover .dropdown-menu {
+                display: flex;
+            }
+        }
+
+        .dropdown-menu li {
+            width: 100%;
+        }
+
+        .dropdown-menu li a {
+            display: block;
+            color: white;
+            padding: 10px 15px;
+            text-decoration: none;
+            font-size: 14px;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        .dropdown-menu li a:hover {
+            background: var(--primary-color);
+            color: #0f1111;
+        }
+
+        .hero-banner {
+            height: 400px;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background-image: url('https://via.placeholder.com/1400x400?text=Hero+Banner');
+        }
+
+        .hero-text {
+            background: rgba(0, 0, 0, 0.6);
+            color: white;
+            padding: 30px;
+            border-radius: var(--border-radius);
+            text-align: center;
+            max-width: 600px;
+        }
+
+        .hero-text h2 {
+            font-size: 36px;
+            margin-bottom: 15px;
+        }
+
+        .hero-text p {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        .hero-text a {
+            color: #0f1111;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 12px 24px;
+            background: var(--primary-color);
+            border-radius: var(--border-radius);
+            transition: background 0.3s;
+        }
+
+        .hero-text a:hover {
+            background: var(--secondary-color);
+        }
+
+        .category-container {
+            max-width: 1400px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+
+        .category-items {
+            list-style: none;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .category-item {
+            padding: 10px 20px;
+            background: #e6e6e6;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        .category-item:hover {
+            background: var(--primary-color);
+            color: #0f1111;
+        }
+
+        .product-container {
+            max-width: 1400px;
+            margin: 0 auto 30px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            padding: 0 20px;
+        }
+
+        .product-item {
+            background: white;
+            padding: 20px;
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .product-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .product-item img {
+            width: 100%;
+            height: 220px;
+            object-fit: contain;
+            margin-bottom: 15px;
+        }
+
+        .product-item h3 {
+            font-size: 18px;
+            line-height: 1.4;
+            height: 50px;
+            overflow: hidden;
+        }
+
+        .product-item .price {
+            color: #b12704;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .product-item .original-price {
+            color: #666;
+            font-size: 14px;
+            text-decoration: line-through;
+            margin-left: 10px;
+        }
+
+        .product-item .discount {
+            color: #008000;
+            font-size: 14px;
+        }
+
+        .product-item .rating {
+            font-size: 14px;
+        }
+
+        .product-item .btn {
+            padding: 12px;
+            background: var(--primary-color);
+            color: #0f1111;
+            text-decoration: none;
+            border-radius: var(--border-radius);
+            font-size: 14px;
+            text-align: center;
+            transition: background 0.3s;
+            margin-top: auto;
+        }
+
+        .product-item .btn:hover {
+            background: var(--secondary-color);
+        }
+
+        .footer-container {
+            background: linear-gradient(to top, #131921, #232f3e);
+            color: white;
+            padding: 40px 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .footer-item {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .footer-item h4 {
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+
+        .footer-item ul {
+            list-style: none;
+        }
+
+        .footer-item li {
+            margin-bottom: 12px;
+        }
+
+        .footer-item a {
+            color: #ddd;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+
+        .footer-item a:hover {
+            color: var(--primary-color);
+        }
+
+        @media (max-width: 1024px) {
+            .header-item.search-bar {
+                margin: 10px 0;
+                width: 100%;
+            }
+
+            .hero-banner {
+                height: 300px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-items {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .dropdown-menu {
+                position: static;
+                box-shadow: none;
+                background: #1c252f;
+                display: none;
+            }
+
+            .dropdown.active .dropdown-menu {
+                display: flex;
+            }
+
+            .hero-banner {
+                height: 200px;
+            }
+
+            .hero-text h2 {
+                font-size: 24px;
+            }
+
+            .hero-text p {
+                font-size: 16px;
+            }
+
+            .footer-container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .category-items {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header-container">
+        <div class="header-item logo">
+            <img src="IMG-20250503-WA0002.jpg" alt="Logo">
+        </div>
+        <form class="header-item search-bar">
+            <select name="category" aria-label="Select category">
+                <option>All Categories</option>
+                <option>Electronics</option>
+                <option>Books</option>
+                <option>Fashion</option>
+            </select>
+            <input type="text" placeholder="Search Amazon.in" name="query" aria-label="Search query">
+            <button type="submit" aria-label="Search">Search</button>
+        </form>
+        <div class="header-item account" role="button" tabindex="0">
+            Hello, Sign in<br>Account & Lists
+        </div>
+        <div class="header-item cart" role="button" tabindex="0">
+            Cart
+        </div>
+    </header>
+
+    <nav class="nav-container">
+        <ul class="nav-items">
+            <li class="nav-item dropdown">
+                <div class="dropdown-toggle" onclick="toggleDropdown()">
+                    <span>Menu</span>
+                    <span class="caret">▼</span>
+                </div>
+                <ul class="dropdown-menu">
+                    <li><a href="#">All</a></li>
+                    <li><a href="#">Today's Deals</a></li>
+                    <li><a href="#">Electronics</a></li>
+                    <li><a href="#">Fashion</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+
+    <section class="hero-banner">
+        <div class="hero-text">
+            <h2>Great Indian Festival</h2>
+            <p>Up to 70% Off on Electronics, Fashion & More</p>
+            <a href="#" role="button">Shop Now</a>
+        </div>
+    </section>
+
+    <section class="category-container">
+        <h3>Shop by Category</h3>
+        <ul class="category-items">
+            <li class="category-item">All</li>
+            <li class="category-item">Electronics</li>
+            <li class="category-item">Fashion</li>
+            <li class="category-item">Home & Kitchen</li>
+            <li class="category-item">Books</li>
+            <li class="category-item">Beauty</li>
+            <li class="category-item">Sports</li>
+            <li class="category-item">Toys</li>
+        </ul>
+    </section>
+
+    <section class="product-container">
+        <div class="product-item">
+            <img src="dee6a15ca313f3a7b211f2a440e9f05e.webp" alt="Smartphone">
+            <h3>Smartphone (8GB RAM, 128GB Storage)</h3>
+            <p class="price">₹18,999 <span class="original-price">₹20,999</span></p>
+            <p class="discount">10% Off</p>
+            <p class="rating">4.2/5</p>
+            <a href="#" class="btn" role="button">Add to Cart</a>
+        </div>
+        <div class="product-item">
+            <img src="images.jpeg" alt="Shirt">
+            <h3>Men's Regular Fit Shirt</h3>
+            <p class="price">₹1,099 <span class="original-price">₹1,999</span></p>
+            <p class="discount">45% Off</p>
+            <p class="rating">4.8/5</p>
+            <a href="#" class="btn" role="button">Add to Cart</a>
+        </div>
+        <div class="product-item">
+            <img src="shopping.webp" alt="Cooktop">
+            <h3>Induction Cooktop</h3>
+            <p class="price">₹2,799 <span class="original-price">₹4,295</span></p>
+            <p class="discount">35% Off</p>
+            <p class="rating">4.3/5</p>
+            <a href="#" class="btn" role="button">Add to Cart</a>
+        </div>
+        <div class="product-item">
+            <img src="shopping_1.webp" alt="Book">
+            <h3>The Psychology of Money</h3>
+            <p class="price">₹399 <span class="original-price">₹599</span></p>
+            <p class="discount">33% Off</p>
+            <p class="rating">4.7/5</p>
+            <a href="#" class="btn" role="button">Add to Cart</a>
+        </div>
+        <div class="product-item">
+            <img src="shopping_2.webp" alt="Smartwatch">
+            <h3>Smartwatch with Fitness Tracker</h3>
+            <p class="price">₹3,499 <span class="original-price">₹5,999</span></p>
+            <p class="discount">42% Off</p>
+            <p class="rating">4.5/5</p>
+            <a href="#" class="btn" role="button">Add to Cart</a>
+        </div>
+        <div class="product-item">
+            <img src="shopping_3.webp" alt="Makeup">
+            <h3>Matte Lipstick Set</h3>
+            <p class="price">₹799 <span class="original-price">₹1,199</span></p>
+            <p class="discount">33% Off</p>
+            <p class="rating">4.4/5</p>
+            <a href="#" class="btn" role="button">Add to Cart</a>
+        </div>
+    </section>
+
+    <footer class="footer-container">
+        <div class="footer-item">
+            <h4>Get to Know Us</h4>
+            <ul>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Careers</a></li>
+            </ul>
+        </div>
+        <div class="footer-item">
+            <h4>Connect with Us</h4>
+            <ul>
+                <li><a href="#">Facebook</a></li>
+                <li><a href="#">Twitter</a></li>
+            </ul>
+        </div>
+        <div class="footer-item">
+            <h4>Let Us Help You</h4>
+            <ul>
+                <li><a href="#">Your Account</a></li>
+                <li><a href="#">Help</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <script>
+        function toggleDropdown() {
+            const dropdown = document.querySelector('.dropdown');
+            dropdown.classList.toggle('active');
+        }
+
+        document.addEventListener('click', function(event) {
+            const dropdown = document.querySelector('.dropdown');
+            const toggle = document.querySelector('.dropdown-toggle');
+            if (!dropdown.contains(event.target) && event.target !== toggle) {
+                dropdown.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>
